@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F410FFE6-0A26-43C3-B83F-8D61A030215C}"
 EndProject
@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TravelBlog", "src\TravelBlog\TravelBlog.xproj", "{A422B25F-608F-4A60-9257-F230354B082D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{80ABD605-B5CD-4113-BA5B-17F76886862A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TravelBlog.Tests", "TravelBlog.Tests\TravelBlog.Tests.xproj", "{0282E0E4-A9B2-466C-8014-5B3780E360CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,11 +26,16 @@ Global
 		{A422B25F-608F-4A60-9257-F230354B082D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A422B25F-608F-4A60-9257-F230354B082D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A422B25F-608F-4A60-9257-F230354B082D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0282E0E4-A9B2-466C-8014-5B3780E360CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0282E0E4-A9B2-466C-8014-5B3780E360CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0282E0E4-A9B2-466C-8014-5B3780E360CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0282E0E4-A9B2-466C-8014-5B3780E360CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A422B25F-608F-4A60-9257-F230354B082D} = {F410FFE6-0A26-43C3-B83F-8D61A030215C}
+		{0282E0E4-A9B2-466C-8014-5B3780E360CA} = {80ABD605-B5CD-4113-BA5B-17F76886862A}
 	EndGlobalSection
 EndGlobal

@@ -14,6 +14,7 @@ namespace TravelBlog.Models
         public DbSet<PeopleExperience> PeopleExperiences { get; set; }
 
         public DbSet<PeopleLocation> PeopleLocations { get; set; }
+        public DbSet<Suggestion> Suggestions { get; set; }
 
         
         protected override void OnModelCreating(ModelBuilder builder)
