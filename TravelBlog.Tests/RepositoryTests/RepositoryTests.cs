@@ -12,10 +12,10 @@ namespace TravelBlog.Tests.RepositoryTests
 {
     public class RepositoryTests : IDisposable
     {
-        EFSuggestionRepository db = new EFSuggestionRepository( new TravelBlogTestDbContext());
+        EFSuggestionRepository repo = new EFSuggestionRepository( new TravelBlogTestDbContext());
         public void Dispose()
         {
-            db.DeleteSuggestions();
+            repo.DeleteSuggestions();
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace TravelBlog.Tests.RepositoryTests
             //DbSetup();
             //Act
             //Assert
-            var result = db.AllSuggestions;
+            var result = repo.AllSuggestions;
             Assert.IsType<List<Suggestion>>(result);
         }
         [Fact]
@@ -40,11 +40,70 @@ namespace TravelBlog.Tests.RepositoryTests
             var list = new List<Suggestion>();
             list.Add(newSuggestion);
             //Act
-            db.Add(newSuggestion);
-            db.SaveChanges();
+            repo.Add(newSuggestion);
+            repo.SaveChanges();
             //Assert
             //Assert.True(true);
-            Assert.Equal(db.AllSuggestions, list);
+            Assert.Equal(repo.AllSuggestions, list);
+        }
+        [Fact]
+        public void Db_FindSuggestion_Test()
+        {
+            //Arrange
+            //Arrange
+            Suggestion newSuggestion = new Suggestion()
+            {
+                City = "Portland",
+                Country = "USA",
+                Description = "Rainy"
+            };
+            repo.Add(newSuggestion);
+            repo.SaveChanges();
+            var suggestionId = newSuggestion.Id;
+            // Act
+            Suggestion foundSuggestion = repo.Find(suggestionId);
+            //Assert
+            Assert.Equal(newSuggestion, foundSuggestion);
+        }
+        [Fact]
+        public void Db_DeleteIndividualSuggestion_Test()
+        {
+            //Arrange
+            Suggestion newSuggestion = new Suggestion()
+            {
+                City = "Portland",
+                Country = "USA",
+                Description = "Rainy"
+            };
+            repo.Add(newSuggestion);
+            repo.SaveChanges();
+            var suggestionId = newSuggestion.Id;
+            //Act
+            repo.Delete(suggestionId);
+            //Assert
+            Assert.DoesNotContain<Suggestion>(newSuggestion, repo.AllSuggestions);
+        }
+        [Fact]
+        public void Db_UpdatesChanges_Test()
+        {
+            //Arrange
+            Suggestion newSuggestion = new Suggestion()
+            {
+                City = "Portland",
+                Country = "USA",
+                Description = "Rainy"
+            };
+            repo.Add(newSuggestion);
+            repo.SaveChanges();
+            var suggestionId = newSuggestion.Id;
+            var foundSuggestion = repo.Find(suggestionId);
+            //Act
+            var newName = "Houston";
+            foundSuggestion.City = newName;
+            repo.Edit(foundSuggestion);
+            var changedSuggestion = repo.Find(suggestionId);
+            //Assert
+            Assert.Equal(newName, changedSuggestion.City);
         }
     }
 }

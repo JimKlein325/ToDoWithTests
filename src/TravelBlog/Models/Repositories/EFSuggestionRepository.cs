@@ -49,5 +49,20 @@ namespace TravelBlog.Models
         {
             db.SaveChanges();
         }
+        public Suggestion Find (int id)
+        {
+           return db.Suggestions.FirstOrDefault(s => s.Id == id);
+        }
+        public void Delete(int id)
+        {
+            var deletedSuggestion = db.Suggestions.FirstOrDefault(s=> s.Id == id);
+            db.Suggestions.Remove(deletedSuggestion);
+            db.SaveChanges();
+        }
+        public void Edit(Suggestion suggestion)
+        {
+            db.Entry(suggestion).State = EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }

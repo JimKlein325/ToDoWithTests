@@ -16,7 +16,16 @@ namespace TravelBlog.Models
         public string Country { get; set; }
         public string Description { get; set; }
 
-
+        public Suggestion(string city, string country, string description)
+        {
+            City = city;
+            this.Country = country;
+            this.Description = description;
+        }
+        public Suggestion()
+        {
+           
+        }
         public override bool Equals(System.Object otherSuggestion)
         {
             if (!(otherSuggestion is Suggestion))
