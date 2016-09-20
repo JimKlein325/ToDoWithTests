@@ -15,21 +15,55 @@ namespace TravelBlog.Tests.ControllerTests
         EFSuggestionRepository db = new EFSuggestionRepository(new TravelBlogDbContext());
         Mock<ISuggestionRepository> mock = new Mock<ISuggestionRepository>();
 
-        //private void DbSetup()
-        //{
-        //    mock.Setup(m => m.GetAllSuggestions());//.Returns( 
-
-        //    //    new List<Suggestion>()
-        //    //{
-        //    //    new Suggestion {Id = 1, City = "Portland", Country = "USA", Description = "Rainy" },
-        //    //    new Suggestion {Id = 2, City = "Seattle", Country = "USA", Description = "Rainier than Portland" },
-        //    //    new Suggestion {Id = 3, City = "Los Angeles", Country = "USA", Description = "Sunny all the time" }
-        //    //}
-        //    //);
-        //}
+        private void DbSetup()
+        {
+            mock.Setup(m => m.AllSuggestions).Returns(new List<Suggestion>
+            {
+                new Suggestion { Id = 1, City = "Portland", Country = "United States", Description = "The City of Roses"}
+            });
+            
+        }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Mock_GetViewResultIndex_Test()
+        {
+            //Arrange
+            DbSetup();
+            SuggestionsController controller = new SuggestionsController(mock.Object);
+            //Act
+            var result = controller.Index();
+            //Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void Mock_IndexListOfSuggestions_Test()
+        {
+            //Arrange
+            DbSetup();
+            ViewResult indexView = new SuggestionsController(mock.Object).Index() as ViewResult;
+            //Act
+            var result = indexView.ViewData.Model;
+            //Assert
+            Assert.IsType<List<Suggestion>>(result);
+        }
+        [Fact]
+        public void Mock_ConfirmEntry_Test()
+        {
+            //Arrange
+            DbSetup();
+            SuggestionsController controller = new SuggestionsController(mock.Object);
+            var testItem = new Suggestion { Id = 1, City = "Portland", Country = "United States", Description = "The City of Roses" };
+            //Act
+            ViewResult indexView = controller.Index() as ViewResult;
+            var collection = indexView.ViewData.Model as IEnumerable<Suggestion>;
+
+            // Assert
+            Assert.Contains<Suggestion>(testItem, collection);
         }
     }
 }
