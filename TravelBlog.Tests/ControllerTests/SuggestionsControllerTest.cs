@@ -12,7 +12,7 @@ namespace TravelBlog.Tests.ControllerTests
 {
     public class SuggestionsControllerTest : IDisposable
     {
-        EFSuggestionRepository db = new EFSuggestionRepository(new TravelBlogDbContext());
+        EFSuggestionRepository repoWithTestDBContext = new EFSuggestionRepository(new TravelBlogTestDbContext());
         Mock<ISuggestionRepository> mock = new Mock<ISuggestionRepository>();
 
         private void DbSetup()
@@ -64,6 +64,19 @@ namespace TravelBlog.Tests.ControllerTests
 
             // Assert
             Assert.Contains<Suggestion>(testItem, collection);
+        }
+       [Fact]
+       public void Db_AddSuggestion_Test()
+        {
+            //Arrange
+            SuggestionsController controller = new SuggestionsController(this.repoWithTestDBContext);
+            new Suggestion { Id = 1, City = "Borihg", Country = "USA", Description = "Fun places" };
+
+            //Act
+            var addSuggestionView = controller.AddSuggestion("Boring", "USA", "Fun place");// as ViewResult;
+
+            //Assert
+            Assert.True(true);
         }
     }
 }

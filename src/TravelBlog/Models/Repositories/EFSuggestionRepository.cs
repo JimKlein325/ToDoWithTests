@@ -43,12 +43,9 @@ namespace TravelBlog.Models
         public void Add(Suggestion suggestion)
         {
             db.Add(suggestion);
-        }
-
-        public void SaveChanges()
-        {
             db.SaveChanges();
         }
+
         public Suggestion Find (int id)
         {
            return db.Suggestions.FirstOrDefault(s => s.Id == id);

@@ -41,7 +41,6 @@ namespace TravelBlog.Tests.RepositoryTests
             list.Add(newSuggestion);
             //Act
             repo.Add(newSuggestion);
-            repo.SaveChanges();
             //Assert
             //Assert.True(true);
             Assert.Equal(repo.AllSuggestions, list);
@@ -58,7 +57,6 @@ namespace TravelBlog.Tests.RepositoryTests
                 Description = "Rainy"
             };
             repo.Add(newSuggestion);
-            repo.SaveChanges();
             var suggestionId = newSuggestion.Id;
             // Act
             Suggestion foundSuggestion = repo.Find(suggestionId);
@@ -76,7 +74,6 @@ namespace TravelBlog.Tests.RepositoryTests
                 Description = "Rainy"
             };
             repo.Add(newSuggestion);
-            repo.SaveChanges();
             var suggestionId = newSuggestion.Id;
             //Act
             repo.Delete(suggestionId);
@@ -94,7 +91,6 @@ namespace TravelBlog.Tests.RepositoryTests
                 Description = "Rainy"
             };
             repo.Add(newSuggestion);
-            repo.SaveChanges();
             var suggestionId = newSuggestion.Id;
             var foundSuggestion = repo.Find(suggestionId);
             //Act

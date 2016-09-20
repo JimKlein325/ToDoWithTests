@@ -22,5 +22,13 @@ namespace TravelBlog.Controllers
         {
             return View(repo.AllSuggestions.ToList());
         }
+        [HttpPost]
+        public IActionResult AddSuggestion(string newCity, string newCountry, string newDescription)
+        {
+            Suggestion newDestination = new Suggestion(newCity, newCountry, newDescription);
+            repo.Add(newDestination);
+            return Json(repo.AllSuggestions);
+        }
+
     }
 }
